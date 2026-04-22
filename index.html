@@ -5,62 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ondas Spectrum Analyzer Utility - Enhanced Capture</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#0f0f0f;
-    --panel:#1b1b1b;
-    --panel2:#202020;
-    --panel3:#252525;
-    --border:#343434;
-    --text:#f2f2f2;
-    --muted:#b9b9b9;
-    --trace:#6ec6ff;
-    --hold:#ff7a93;
-    --marker:#ffd166;
-    --good:#6dd68c;
-    --warn:#ffb366;
-    --bad:#ff6f6f;
+    --bg:#f6f8ef;
+    --bg2:#eef2dd;
+    --panel:#ffffff;
+    --panel2:#f9fbf1;
+    --panel3:#f0f5e0;
+    --border:#d7dfbe;
+    --text:#1f2a1f;
+    --muted:#5a6757;
+    --trace:#1886d8;
+    --hold:#e55c7a;
+    --marker:#e09a19;
+    --good:#2b8f50;
+    --warn:#b97a15;
+    --bad:#c94949;
+    --ring:#c6d39e;
+    --shadow:0 10px 30px rgba(35, 49, 26, 0.09);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    background: var(--bg);
+    font-family: "Sora", "Trebuchet MS", "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top right, #ffffff 0%, var(--bg) 44%, var(--bg2) 100%);
     color: var(--text);
     overflow-x: hidden;
   }
-  .app { max-width: 1420px; margin: 0 auto; padding: 14px; }
+  .app { max-width: 1440px; margin: 0 auto; padding: 16px; }
   .header, .sidebar, .chart-panel {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
   }
-  .header { padding: 16px 18px; margin-bottom: 14px; }
-  .title { margin: 0; font-size: 32px; line-height: 1.05; }
-  .subtitle { margin: 6px 0 0; color: var(--muted); }
+  .header {
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    background:
+      linear-gradient(120deg, #fefefe 0%, #f7fae9 60%, #edf4d8 100%);
+  }
+  .title { margin: 0; font-size: 31px; line-height: 1.1; letter-spacing: -0.4px; }
+  .subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
   .main {
     display: grid;
-    grid-template-columns: 360px minmax(0,1fr);
+    grid-template-columns: 390px minmax(0,1fr);
     gap: 14px;
     align-items: start;
   }
-  .sidebar { padding: 16px; overflow-y: auto; max-height: 90vh; }
-  .chart-panel { padding: 14px; overflow: hidden; min-width: 0; }
-  h2 { margin: 0 0 10px; font-size: 22px; }
-  h3 { margin: 0 0 8px; font-size: 16px; color: #e8e8e8; }
+  .sidebar {
+    padding: 16px;
+    overflow-y: auto;
+    max-height: 91vh;
+    background:
+      linear-gradient(180deg, #ffffff 0%, #fbfdf4 100%);
+  }
+  .chart-panel {
+    padding: 14px;
+    overflow: hidden;
+    min-width: 0;
+    background:
+      linear-gradient(180deg, #ffffff 0%, #f8fbe9 100%);
+  }
+  h2 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.25px; }
+  h3 { margin: 0 0 8px; font-size: 15px; color: #283226; }
+  .intro {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
   .section {
     margin-top: 14px;
     border: 1px solid var(--border);
     background: var(--panel2);
-    border-radius: 14px;
-    padding: 12px;
+    border-radius: 15px;
+    padding: 12px 12px 13px;
+  }
+  .section h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .section small {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
   }
   .upload-box {
-    border: 1px dashed #446a70;
-    background: #183036;
+    border: 1px dashed #8fa274;
+    background:
+      linear-gradient(180deg, #f8fced 0%, #edf5db 100%);
     border-radius: 14px;
     padding: 14px;
     margin: 14px 0 0;
+  }
+  .upload-box strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .upload-box .hint {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
   }
   .file-input { width: 100%; display: block; margin: 10px 0 12px; }
   .btn, .play-btn {
@@ -73,22 +124,175 @@
     min-height: 42px;
     cursor: pointer;
     margin-top: 10px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .btn:hover, .play-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(40, 60, 26, 0.13);
+    background: #ecf3d8;
+  }
+  .play-btn {
+    background: linear-gradient(120deg, #ddecc0 0%, #d2e6a8 100%);
+    border-color: #b9cf8c;
+  }
+  .play-btn.is-playing {
+    background: linear-gradient(120deg, #ffe6be 0%, #ffdc9f 100%);
+    border-color: #e8bf74;
   }
   .btn:disabled, .play-btn:disabled { opacity: 0.6; cursor: not-allowed; }
   .row-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .row-buttons.three { grid-template-columns: 1fr 1fr 1fr; }
   .control { margin-top: 10px; }
-  .control label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+  .control label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
   .control input, .control select {
     width: 100%;
-    padding: 8px;
-    border-radius: 7px;
-    background: #2a2a2a;
+    padding: 9px;
+    border-radius: 9px;
+    background: #ffffff;
     color: var(--text);
-    border: 1px solid #444;
+    border: 1px solid #c7d3b2;
+    font-family: inherit;
+    font-size: 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .control input:focus, .control select:focus {
+    outline: none;
+    border-color: #95b45a;
+    box-shadow: 0 0 0 3px rgba(149, 180, 90, 0.18);
   }
   .checkline { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text); }
+  .checkline input { accent-color: #7ea840; }
   .inline { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .help {
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .spectro-scale-wrap {
+    margin-top: 10px;
+    border: 1px solid #d7dfbe;
+    border-radius: 10px;
+    padding: 9px;
+    background: #f7fbe8;
+  }
+  .spectro-scale-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .sidebar-tabs {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7px;
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f2f6e6;
+  }
+  .tab-btn {
+    border: 1px solid transparent;
+    border-radius: 9px;
+    padding: 8px 8px;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+  }
+  .tab-btn.is-active {
+    background: #ffffff;
+    color: #263220;
+    border-color: #cedbae;
+    box-shadow: 0 3px 8px rgba(70, 94, 41, 0.1);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.is-active { display: block; }
+  .toolbar-row {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .ghost-btn {
+    border: 1px solid #c6d3a8;
+    background: #f8fbe9;
+    color: #3e4f35;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.16s ease;
+  }
+  .ghost-btn:hover {
+    background: #eef4dd;
+    border-color: #b6c796;
+  }
+  .ghost-btn.is-active {
+    background: #e1ecc5;
+    border-color: #9db66a;
+    color: #2b3a20;
+  }
+  .focus-card {
+    margin-top: 12px;
+    border: 1px solid #ccd9ad;
+    border-radius: 12px;
+    padding: 10px;
+    background: linear-gradient(120deg, #ffffff 0%, #f4f9e6 100%);
+    font-size: 11px;
+    color: #4f5f45;
+    line-height: 1.45;
+  }
+  .focus-card strong { color: #293226; }
+  .quick-guide {
+    margin-top: 10px;
+    border: 1px solid #cfdbb2;
+    border-radius: 12px;
+    background: #f7fbe8;
+    padding: 9px 10px;
+  }
+  .quick-guide summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    color: #314027;
+  }
+  .quick-guide ol {
+    margin: 8px 0 0 18px;
+    padding: 0;
+    color: #556351;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .slider-meta {
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .slider-meta strong {
+    color: #263220;
+    background: #ecf3d8;
+    border: 1px solid #ccdbac;
+    border-radius: 999px;
+    padding: 3px 8px;
+  }
   .stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -96,13 +300,13 @@
     margin-top: 14px;
   }
   .stat {
-    background: var(--panel2);
+    background: #f8fbe9;
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 10px;
   }
-  .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
-  .v { font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .k { color: #5d6a59; font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
+  .v { font-size: 18px; font-weight: 700; margin-top: 4px; letter-spacing: -0.1px; }
   .quality-line {
     margin-top: 6px;
     font-size: 12px;
@@ -112,20 +316,37 @@
   .quality-line strong { color: var(--text); }
   .status {
     margin-top: 14px;
-    color: var(--muted);
-    font-size: 13px;
+    color: #445344;
+    font-size: 12px;
     line-height: 1.4;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: #1a1a1a;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid #cfdab3;
+    background: #f7fbe8;
+  }
+  .status.is-ok {
+    background: #eef8e8;
+    border-color: #b9dab1;
+    color: #2f6e3f;
+  }
+  .status.is-warn {
+    background: #fff8e8;
+    border-color: #f2d092;
+    color: #94600c;
+  }
+  .status.is-error {
+    background: #fff0ef;
+    border-color: #ecb8b5;
+    color: #8f3833;
   }
   .legend {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 10px;
-    color: var(--muted);
+    margin-bottom: 12px;
+    color: #586857;
+    font-size: 12px;
+    font-weight: 600;
   }
   .legend-line {
     width: 14px;
@@ -138,8 +359,9 @@
     width: 100%;
     height: 690px;
     overflow: hidden;
-    border-radius: 12px;
-    background: #171717;
+    border-radius: 14px;
+    background: #111;
+    border: 1px solid #d7dfbe;
   }
   #plot { width: 100%; height: 100%; }
   .capture-meta {
@@ -151,35 +373,36 @@
   .mini {
     font-size: 12px;
     color: var(--muted);
-    background: #181818;
-    border: 1px solid var(--border);
+    background: #f4f8e5;
+    border: 1px solid #d3dcb9;
     border-radius: 10px;
     padding: 7px;
   }
-  .mini strong { color: var(--text); }
+  .mini strong { color: #253124; }
   .capture-table-wrap {
     margin-top: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid #d3dbb5;
     border-radius: 10px;
     overflow: hidden;
     max-height: 220px;
     overflow-y: auto;
+    background: #ffffff;
   }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
   th, td {
     padding: 7px 8px;
-    border-bottom: 1px solid #2c2c2c;
+    border-bottom: 1px solid #e7edd7;
     white-space: nowrap;
     text-align: left;
   }
   th {
     position: sticky;
     top: 0;
-    background: #1d1d1d;
-    color: #d9d9d9;
+    background: #edf4d8;
+    color: #475247;
     z-index: 1;
   }
-  tr:nth-child(even) td { background: #1c1c1c; }
+  tr:nth-child(even) td { background: #fbfdf6; }
   .dot {
     display: inline-block;
     width: 7px;
@@ -193,6 +416,11 @@
   .bad { color: var(--bad); }
   @media (max-width:1024px) {
     .main { grid-template-columns: 1fr; }
+    .sidebar { max-height: none; }
+    .sidebar-tabs { grid-template-columns: 1fr; }
+    .row-buttons.three { grid-template-columns: 1fr; }
+    .inline { grid-template-columns: 1fr; }
+    .spectro-scale-grid { grid-template-columns: 1fr; }
     #plotWrap { height: 520px; }
   }
 </style>
@@ -206,211 +434,265 @@
 
   <div class="main">
     <div class="sidebar">
-      <h2>Input & Controls</h2>
+      <h2>Control Desk</h2>
+      <p class="intro">Follow this flow: upload data, tune signal quality, then capture/export results.</p>
 
       <div class="upload-box">
-        <strong>Upload scan file</strong>
+        <strong>Upload your scan file</strong>
+        <div class="hint">Supported formats: .txt .log .csv .out</div>
         <input class="file-input" id="fileInput" type="file" accept=".txt,.log,.csv,.out" />
         <button class="btn" id="loadSampleBtn">Load Sample Format</button>
       </div>
 
-      <div class="section">
-        <h3>Display</h3>
-        <div class="control">
-          <label for="viewMode">Display mode</label>
-          <select id="viewMode">
-            <option value="spectrum">Spectrum (Line)</option>
-            <option value="spectrogram">Spectrogram (Waterfall)</option>
-          </select>
-        </div>
-        <div class="row-buttons">
-          <button class="play-btn" id="playBtn">Play</button>
-          <button class="btn" id="resetHoldBtn">Reset max hold</button>
-        </div>
-        <div class="control">
-          <label for="playSpeed">Playback speed</label>
-          <select id="playSpeed">
-            <option value="50">20 sweeps/sec</option>
-            <option value="100">10 sweeps/sec</option>
-            <option value="200">5 sweeps/sec</option>
-            <option value="500" selected>2 sweeps/sec</option>
-            <option value="1000">1 sweep/sec</option>
-          </select>
-        </div>
-        <div class="control">
-          <label for="frameSlider">Sweep index</label>
-          <input id="frameSlider" type="range" min="0" max="0" value="0" step="1" />
-        </div>
+      <div class="sidebar-tabs" id="sidebarTabs">
+        <button class="tab-btn is-active" type="button" data-tab-target="core">Quick Run</button>
+        <button class="tab-btn" type="button" data-tab-target="advanced">Signal Tuning</button>
+        <button class="tab-btn" type="button" data-tab-target="capture">Band Capture</button>
+      </div>
+      <div class="toolbar-row">
+        <button class="ghost-btn" id="showAllControlsBtn" type="button">Show all controls</button>
       </div>
 
-      <div class="section">
-        <h3>Capture Integrity</h3>
-        <div class="control">
-          <label class="checkline"><input type="checkbox" id="qualityGate" checked /> Reject low-completeness sweeps</label>
-        </div>
-        <div class="inline">
+      <div class="focus-card">
+        <strong>Tip:</strong> Start with <strong>Quick Run</strong>, verify shape and playback, then move to <strong>Signal Tuning</strong> only if data looks noisy.
+      </div>
+      <details class="quick-guide">
+        <summary>First-time usage guide</summary>
+        <ol>
+          <li>Upload a scan file or load sample data.</li>
+          <li>Use Quick Run to inspect sweeps and playback behavior.</li>
+          <li>Use Signal Tuning only when your signal looks noisy or incomplete.</li>
+          <li>Use Band Capture to log threshold-based events and export CSV.</li>
+        </ol>
+      </details>
+
+      <div class="tab-panel is-active" data-tab-panel="core">
+        <div class="section">
+          <h3>Display <small>Step 1</small></h3>
           <div class="control">
-            <label for="minValidPercent">Min valid bins (%)</label>
-            <input id="minValidPercent" type="number" min="0" max="100" step="1" value="90" />
-          </div>
-          <div class="control">
-            <label for="missingPolicy">Missing-bin handling</label>
-            <select id="missingPolicy">
-              <option value="interpolate" selected>Repair by interpolation</option>
-              <option value="pad">Pad with last value</option>
-              <option value="drop">Drop incomplete sweep</option>
+            <label for="viewMode">Display mode</label>
+            <select id="viewMode">
+              <option value="spectrum">Spectrum (Line)</option>
+              <option value="spectrogram">Spectrogram (Waterfall)</option>
             </select>
           </div>
-        </div>
-        <div class="quality-line" id="qualitySummary">No source loaded.</div>
-      </div>
-
-      <div class="section">
-        <h3>Sample Conditioning</h3>
-        <div class="inline">
+          <div class="row-buttons">
+            <button class="play-btn" id="playBtn">Play</button>
+            <button class="btn" id="resetHoldBtn">Reset max hold</button>
+          </div>
           <div class="control">
-            <label for="avgWindow">Sweep averaging</label>
-            <select id="avgWindow">
-              <option value="1" selected>1 sweep (raw)</option>
-              <option value="3">3 sweeps</option>
-              <option value="5">5 sweeps</option>
-              <option value="9">9 sweeps</option>
+            <label for="playSpeed">Playback speed</label>
+            <select id="playSpeed">
+              <option value="50">20 sweeps/sec</option>
+              <option value="100">10 sweeps/sec</option>
+              <option value="200">5 sweeps/sec</option>
+              <option value="500" selected>2 sweeps/sec</option>
+              <option value="1000">1 sweep/sec</option>
             </select>
           </div>
           <div class="control">
-            <label for="smoothMode">In-sweep smoothing</label>
-            <select id="smoothMode">
-              <option value="raw" selected>None</option>
-              <option value="mavg3">Moving average (3)</option>
-              <option value="mavg5">Moving average (5)</option>
-              <option value="median3">Median filter (3)</option>
+            <label for="frameSlider">Sweep index</label>
+            <input id="frameSlider" type="range" min="0" max="0" value="0" step="1" />
+            <div class="slider-meta">
+              <span>Current sweep</span>
+              <strong id="currentSweepLabel">0 / 0</strong>
+            </div>
+          </div>
+          <div class="spectro-scale-wrap">
+            <div class="control">
+              <label for="spectrogramScaleMode">Spectrogram intensity scale</label>
+              <select id="spectrogramScaleMode">
+                <option value="fixed" selected>Fixed range (best for file-to-file comparison)</option>
+                <option value="auto">Auto range (from current file)</option>
+              </select>
+            </div>
+            <div class="spectro-scale-grid" id="spectrogramScaleInputs">
+              <div class="control">
+                <label for="spectrogramMinDbm">Min dBm</label>
+                <input id="spectrogramMinDbm" type="number" step="1" value="-130" />
+              </div>
+              <div class="control">
+                <label for="spectrogramMaxDbm">Max dBm</label>
+                <input id="spectrogramMaxDbm" type="number" step="1" value="-70" />
+              </div>
+            </div>
+          </div>
+          <div class="help">Use slider for frame-by-frame inspection and to validate anomalies before capture.</div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="advanced">
+        <div class="section">
+          <h3>Capture Integrity <small>Step 2</small></h3>
+          <div class="control">
+            <label class="checkline"><input type="checkbox" id="qualityGate" checked /> Reject low-completeness sweeps</label>
+          </div>
+          <div class="inline">
+            <div class="control">
+              <label for="minValidPercent">Min valid bins (%)</label>
+              <input id="minValidPercent" type="number" min="0" max="100" step="1" value="90" />
+            </div>
+            <div class="control">
+              <label for="missingPolicy">Missing-bin handling</label>
+              <select id="missingPolicy">
+                <option value="interpolate" selected>Repair by interpolation</option>
+                <option value="pad">Pad with last value</option>
+                <option value="drop">Drop incomplete sweep</option>
+              </select>
+            </div>
+          </div>
+          <div class="quality-line" id="qualitySummary">No source loaded.</div>
+        </div>
+
+        <div class="section">
+          <h3>Sample Conditioning</h3>
+          <div class="inline">
+            <div class="control">
+              <label for="avgWindow">Sweep averaging</label>
+              <select id="avgWindow">
+                <option value="1" selected>1 sweep (raw)</option>
+                <option value="3">3 sweeps</option>
+                <option value="5">5 sweeps</option>
+                <option value="9">9 sweeps</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="smoothMode">In-sweep smoothing</label>
+              <select id="smoothMode">
+                <option value="raw" selected>None</option>
+                <option value="mavg3">Moving average (3)</option>
+                <option value="mavg5">Moving average (5)</option>
+                <option value="median3">Median filter (3)</option>
+              </select>
+            </div>
+          </div>
+          <div class="inline">
+            <div class="control">
+              <label class="checkline"><input type="checkbox" id="despikeEnable" checked /> De-spike neighbors</label>
+            </div>
+            <div class="control">
+              <label for="despikeThreshold">Spike threshold (dB)</label>
+              <input id="despikeThreshold" type="number" min="1" max="40" step="1" value="12" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="ySettingsBox">
+          <h3>Y-Axis</h3>
+          <div class="control">
+            <label class="checkline"><input type="checkbox" id="autoY" checked /> Auto Y-axis</label>
+          </div>
+          <div class="inline">
+            <div class="control">
+              <label for="refLevel">Reference level (top dBm)</label>
+              <input id="refLevel" type="number" step="1" value="-100" />
+            </div>
+            <div class="control">
+              <label for="yPerDiv">Y scale per division</label>
+              <select id="yPerDiv">
+                <option value="1">1 dB/div</option>
+                <option value="2">2 dB/div</option>
+                <option value="5" selected>5 dB/div</option>
+                <option value="10">10 dB/div</option>
+                <option value="20">20 dB/div</option>
+              </select>
+            </div>
+          </div>
+          <div class="control">
+            <label for="yDivCount">Vertical divisions</label>
+            <select id="yDivCount">
+              <option value="6">6 div</option>
+              <option value="8" selected>8 div</option>
+              <option value="10">10 div</option>
+              <option value="12">12 div</option>
             </select>
           </div>
         </div>
-        <div class="inline">
+
+        <div class="section" id="markerBox">
+          <h3>Marker</h3>
           <div class="control">
-            <label class="checkline"><input type="checkbox" id="despikeEnable" checked /> De-spike neighbors</label>
+            <label class="checkline"><input type="checkbox" id="markerEnable" /> Enable marker</label>
           </div>
           <div class="control">
-            <label for="despikeThreshold">Spike threshold (dB)</label>
-            <input id="despikeThreshold" type="number" min="1" max="40" step="1" value="12" />
+            <label for="markerType">Marker type</label>
+            <select id="markerType">
+              <option value="peak">Peak</option>
+              <option value="manual">Manual frequency</option>
+            </select>
+          </div>
+          <div class="control" id="peakSearchCtrl">
+            <label for="peakSearch">Peak search mode</label>
+            <select id="peakSearch">
+              <option value="current">Current sweep peak</option>
+              <option value="maxhold">Max hold peak</option>
+            </select>
+          </div>
+          <div class="control" id="markerFreqCtrl">
+            <label for="markerFreq">Manual marker (MHz)</label>
+            <input id="markerFreq" type="number" step="0.001" value="936.950" />
           </div>
         </div>
       </div>
 
-      <div class="section" id="ySettingsBox">
-        <h3>Y-Axis</h3>
-        <div class="control">
-          <label class="checkline"><input type="checkbox" id="autoY" checked /> Auto Y-axis</label>
-        </div>
-        <div class="inline">
-          <div class="control">
-            <label for="refLevel">Reference level (top dBm)</label>
-            <input id="refLevel" type="number" step="1" value="-100" />
+      <div class="tab-panel" data-tab-panel="capture">
+        <div class="section">
+          <h3>Band Capture <small>Step 3</small></h3>
+          <div class="inline">
+            <div class="control">
+              <label for="captureCenter">Center (MHz)</label>
+              <input id="captureCenter" type="number" step="0.001" value="936.950" />
+            </div>
+            <div class="control">
+              <label for="captureSpan">Span (kHz)</label>
+              <input id="captureSpan" type="number" min="0" step="1" value="20" />
+            </div>
+          </div>
+          <div class="inline">
+            <div class="control">
+              <label for="captureMethod">Metric</label>
+              <select id="captureMethod">
+                <option value="max" selected>Band max</option>
+                <option value="mean">Band mean</option>
+                <option value="median">Band median</option>
+              </select>
+            </div>
+            <div class="control">
+              <label for="captureThreshold">Threshold (dBm)</label>
+              <input id="captureThreshold" type="number" step="0.1" value="-105" />
+            </div>
           </div>
           <div class="control">
-            <label for="yPerDiv">Y scale per division</label>
-            <select id="yPerDiv">
-              <option value="1">1 dB/div</option>
-              <option value="2">2 dB/div</option>
-              <option value="5" selected>5 dB/div</option>
-              <option value="10">10 dB/div</option>
-              <option value="20">20 dB/div</option>
-            </select>
-          </div>
-        </div>
-        <div class="control">
-          <label for="yDivCount">Vertical divisions</label>
-          <select id="yDivCount">
-            <option value="6">6 div</option>
-            <option value="8" selected>8 div</option>
-            <option value="10">10 div</option>
-            <option value="12">12 div</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="section" id="markerBox">
-        <h3>Marker</h3>
-        <div class="control">
-          <label class="checkline"><input type="checkbox" id="markerEnable" /> Enable marker</label>
-        </div>
-        <div class="control">
-          <label for="markerType">Marker type</label>
-          <select id="markerType">
-            <option value="peak">Peak</option>
-            <option value="manual">Manual frequency</option>
-          </select>
-        </div>
-        <div class="control" id="peakSearchCtrl">
-          <label for="peakSearch">Peak search mode</label>
-          <select id="peakSearch">
-            <option value="current">Current sweep peak</option>
-            <option value="maxhold">Max hold peak</option>
-          </select>
-        </div>
-        <div class="control" id="markerFreqCtrl">
-          <label for="markerFreq">Manual marker (MHz)</label>
-          <input id="markerFreq" type="number" step="0.001" value="936.950" />
-        </div>
-      </div>
-
-      <div class="section">
-        <h3>Band Capture</h3>
-        <div class="inline">
-          <div class="control">
-            <label for="captureCenter">Center (MHz)</label>
-            <input id="captureCenter" type="number" step="0.001" value="936.950" />
+            <label class="checkline"><input type="checkbox" id="thresholdEnable" checked /> Use threshold gate</label>
           </div>
           <div class="control">
-            <label for="captureSpan">Span (kHz)</label>
-            <input id="captureSpan" type="number" min="0" step="1" value="20" />
+            <label class="checkline"><input type="checkbox" id="autoCapture" /> Auto-capture each new sweep</label>
           </div>
-        </div>
-        <div class="inline">
-          <div class="control">
-            <label for="captureMethod">Metric</label>
-            <select id="captureMethod">
-              <option value="max" selected>Band max</option>
-              <option value="mean">Band mean</option>
-              <option value="median">Band median</option>
-            </select>
+          <div class="row-buttons three">
+            <button class="btn" id="captureNowBtn">Capture now</button>
+            <button class="btn" id="clearCaptureBtn">Clear</button>
+            <button class="btn" id="exportCaptureBtn">Export CSV</button>
           </div>
-          <div class="control">
-            <label for="captureThreshold">Threshold (dBm)</label>
-            <input id="captureThreshold" type="number" step="0.1" value="-105" />
+          <div class="capture-meta">
+            <div class="mini">Captures: <strong id="captureCount">0</strong></div>
+            <div class="mini">Last: <strong id="lastCapture">-</strong></div>
           </div>
-        </div>
-        <div class="control">
-          <label class="checkline"><input type="checkbox" id="thresholdEnable" checked /> Use threshold gate</label>
-        </div>
-        <div class="control">
-          <label class="checkline"><input type="checkbox" id="autoCapture" /> Auto-capture each new sweep</label>
-        </div>
-        <div class="row-buttons three">
-          <button class="btn" id="captureNowBtn">Capture now</button>
-          <button class="btn" id="clearCaptureBtn">Clear</button>
-          <button class="btn" id="exportCaptureBtn">Export CSV</button>
-        </div>
-        <div class="capture-meta">
-          <div class="mini">Captures: <strong id="captureCount">0</strong></div>
-          <div class="mini">Last: <strong id="lastCapture">-</strong></div>
-        </div>
-        <div class="capture-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Sweep</th>
-                <th>Freq (MHz)</th>
-                <th>dBm</th>
-                <th>Mode</th>
-              </tr>
-            </thead>
-            <tbody id="captureRows">
-              <tr><td colspan="5" class="muted">No captures yet.</td></tr>
-            </tbody>
-          </table>
+          <div class="capture-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Sweep</th>
+                  <th>Freq (MHz)</th>
+                  <th>dBm</th>
+                  <th>Mode</th>
+                </tr>
+              </thead>
+              <tbody id="captureRows">
+                <tr><td colspan="5" class="muted">No captures yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -445,6 +727,11 @@ const E = {
   loadSampleBtn: document.getElementById("loadSampleBtn"),
   viewMode: document.getElementById("viewMode"),
   frameSlider: document.getElementById("frameSlider"),
+  currentSweepLabel: document.getElementById("currentSweepLabel"),
+  spectrogramScaleMode: document.getElementById("spectrogramScaleMode"),
+  spectrogramScaleInputs: document.getElementById("spectrogramScaleInputs"),
+  spectrogramMinDbm: document.getElementById("spectrogramMinDbm"),
+  spectrogramMaxDbm: document.getElementById("spectrogramMaxDbm"),
   playSpeed: document.getElementById("playSpeed"),
   autoY: document.getElementById("autoY"),
   refLevel: document.getElementById("refLevel"),
@@ -487,7 +774,10 @@ const E = {
   lastCapture: document.getElementById("lastCapture"),
   captureRows: document.getElementById("captureRows"),
   peakSearchCtrl: document.getElementById("peakSearchCtrl"),
-  markerFreqCtrl: document.getElementById("markerFreqCtrl")
+  markerFreqCtrl: document.getElementById("markerFreqCtrl"),
+  showAllControlsBtn: document.getElementById("showAllControlsBtn"),
+  tabButtons: document.querySelectorAll("[data-tab-target]"),
+  tabPanels: document.querySelectorAll("[data-tab-panel]")
 };
 
 const S = {
@@ -506,10 +796,16 @@ const S = {
   },
   processCache: new Map(),
   captures: [],
-  lastAutoEvaluatedSweep: -1
+  lastAutoEvaluatedSweep: -1,
+  activeTab: "core",
+  showAllControls: false
 };
 
-function setStatus(msg) {
+function setStatus(msg, tone = "info") {
+  E.statusMsg.classList.remove("is-ok", "is-warn", "is-error");
+  if (tone === "ok") E.statusMsg.classList.add("is-ok");
+  if (tone === "warn") E.statusMsg.classList.add("is-warn");
+  if (tone === "error") E.statusMsg.classList.add("is-error");
   E.statusMsg.textContent = msg;
 }
 
@@ -533,6 +829,27 @@ function yCfg() {
   const per = Number(E.yPerDiv.value) || 5;
   const divs = Number(E.yDivCount.value) || 8;
   return { autorange: false, range: [top - per * divs, top], dtick: per };
+}
+
+function spectrogramScaleCfg() {
+  if (E.spectrogramScaleMode.value === "auto") {
+    return { auto: true };
+  }
+  let min = Number(E.spectrogramMinDbm.value);
+  let max = Number(E.spectrogramMaxDbm.value);
+  if (!Number.isFinite(min)) min = -130;
+  if (!Number.isFinite(max)) max = -70;
+  if (min >= max) {
+    min = max - 1;
+  }
+  return { auto: false, min, max };
+}
+
+function updateSpectrogramScaleUi() {
+  const isAuto = E.spectrogramScaleMode.value === "auto";
+  E.spectrogramScaleInputs.style.display = isAuto ? "none" : "grid";
+  E.spectrogramMinDbm.disabled = isAuto;
+  E.spectrogramMaxDbm.disabled = isAuto;
 }
 
 function repairSamples(raw, targetCount, policy) {
@@ -823,7 +1140,8 @@ function drawSpectrogram() {
   const x = sliceFrames.map((f, idx) => `${f.timestamp} [${startIndex + idx + 1}]`);
   const y = sliceFrames[0].freqs.slice(0, minBins);
 
-  Plotly.react("plot", [{
+  const scale = spectrogramScaleCfg();
+  const heatmap = {
     z,
     x,
     y,
@@ -831,7 +1149,14 @@ function drawSpectrogram() {
     colorscale: "Viridis",
     showscale: true,
     colorbar: { title: "dBm", tickfont: { color: "#fff" } }
-  }], {
+  };
+  if (!scale.auto) {
+    heatmap.zmin = scale.min;
+    heatmap.zmax = scale.max;
+    heatmap.zauto = false;
+  }
+
+  Plotly.react("plot", [heatmap], {
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "#171717",
     font: { color: "#f2f2f2" },
@@ -851,6 +1176,7 @@ function updateStats(frame) {
   E.rbwValue.textContent = frame ? String(frame.rbw) : "-";
   E.parsedRatio.textContent = `${S.metrics.accepted}/${S.metrics.lines}`;
   E.repairDrop.textContent = `${S.metrics.repaired}/${S.metrics.dropped}`;
+  E.currentSweepLabel.textContent = S.frames.length ? `${S.currentIndex + 1} / ${S.frames.length}` : "0 / 0";
 
   if (S.metrics.lines === 0) {
     E.qualitySummary.innerHTML = "No source loaded.";
@@ -952,16 +1278,18 @@ function stopPlayback() {
   }
   S.playing = false;
   E.playBtn.textContent = "Play";
+  E.playBtn.classList.remove("is-playing");
 }
 
 function startPlayback() {
   if (!S.frames.length) {
-    setStatus("Load a valid scan file before playback.");
+    setStatus("Load a valid scan file before playback.", "warn");
     return;
   }
   stopPlayback();
   S.playing = true;
   E.playBtn.textContent = "Pause";
+  E.playBtn.classList.add("is-playing");
   const interval = Math.max(25, Number(E.playSpeed.value) || 500);
   S.timer = setInterval(() => {
     if (!S.frames.length) {
@@ -987,7 +1315,7 @@ function loadFrames(frames, metrics, sourceLabel) {
 
   if (!frames.length) {
     draw(false);
-    setStatus(`No valid sweeps parsed from ${sourceLabel}. Check integrity settings or file format.`);
+    setStatus(`No valid sweeps parsed from ${sourceLabel}. Check integrity settings or file format.`, "error");
     return;
   }
 
@@ -996,7 +1324,8 @@ function loadFrames(frames, metrics, sourceLabel) {
   draw(false);
   setStatus(
     `Loaded ${frames.length} sweeps from ${sourceLabel}. ` +
-    `${metrics.repaired} repaired, ${metrics.dropped} dropped (${metrics.droppedQuality} quality rejected).`
+    `${metrics.repaired} repaired, ${metrics.dropped} dropped (${metrics.droppedQuality} quality rejected).`,
+    "ok"
   );
 }
 
@@ -1031,6 +1360,41 @@ function updateYControlsState() {
   E.refLevel.disabled = disabled;
   E.yPerDiv.disabled = disabled;
   E.yDivCount.disabled = disabled;
+}
+
+function applyTabState() {
+  E.tabButtons.forEach((button) => {
+    const target = button.dataset.tabTarget;
+    const selected = !S.showAllControls && target === S.activeTab;
+    button.classList.toggle("is-active", selected);
+  });
+  E.tabPanels.forEach((panel) => {
+    const panelName = panel.dataset.tabPanel;
+    const visible = S.showAllControls || panelName === S.activeTab;
+    panel.classList.toggle("is-active", visible);
+  });
+  E.showAllControlsBtn.classList.toggle("is-active", S.showAllControls);
+  E.showAllControlsBtn.textContent = S.showAllControls ? "Use guided tabs" : "Show all controls";
+}
+
+function activateTab(name) {
+  S.activeTab = name;
+  S.showAllControls = false;
+  applyTabState();
+}
+
+function initTabs() {
+  E.tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.tabTarget || "core";
+      activateTab(target);
+    });
+  });
+  E.showAllControlsBtn.addEventListener("click", () => {
+    S.showAllControls = !S.showAllControls;
+    applyTabState();
+  });
+  applyTabState();
 }
 
 function nearestIndex(values, target) {
@@ -1161,7 +1525,7 @@ function updateCaptureTable() {
 
 function exportCapturesCsv() {
   if (!S.captures.length) {
-    setStatus("No captures to export.");
+    setStatus("No captures to export.", "warn");
     return;
   }
   const header = "timestamp,sweep,freq_mhz,dbm,mode";
@@ -1221,6 +1585,15 @@ function attachEvents() {
     draw(false);
   };
 
+  ["spectrogramScaleMode", "spectrogramMinDbm", "spectrogramMaxDbm"].forEach((id) => {
+    E[id].oninput = () => {
+      updateSpectrogramScaleUi();
+      if (E.viewMode.value === "spectrogram") {
+        draw(false);
+      }
+    };
+  });
+
   ["autoY", "refLevel", "yPerDiv", "yDivCount"].forEach((id) => {
     E[id].oninput = () => {
       updateYControlsState();
@@ -1256,7 +1629,10 @@ function attachEvents() {
 
   E.captureNowBtn.onclick = () => {
     const ok = captureAtCurrent("manual");
-    setStatus(ok ? "Capture saved from current sweep." : "Capture conditions not met (threshold or no data).");
+    setStatus(
+      ok ? "Capture saved from current sweep." : "Capture conditions not met (threshold or no data).",
+      ok ? "ok" : "warn"
+    );
   };
 
   E.clearCaptureBtn.onclick = () => {
@@ -1270,9 +1646,11 @@ function attachEvents() {
 }
 
 function init() {
+  initTabs();
   attachEvents();
   updateMarkerControls();
   updateYControlsState();
+  updateSpectrogramScaleUi();
   Plotly.newPlot("plot", [], {
     paper_bgcolor: "#0f0f0f",
     plot_bgcolor: "#171717"
