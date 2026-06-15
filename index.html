@@ -1601,12 +1601,14 @@ function drawSpectrogram() {
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "#171717",
     font: { color: "#f2f2f2" },
+    dragmode: 'pan',
     margin: { t: 30, b: 80, l: 110, r: 20 },
     xaxis: { title: "Time", gridcolor: "#333", tickvals, ticktext, tickangle: -45 },
     yaxis: { title: "Frequency (MHz)", gridcolor: "#333" }
   }, {
     responsive: true,
-    displaylogo: false
+    displaylogo: false,
+    scrollZoom: true
   });
 }
 
@@ -1637,7 +1639,7 @@ function draw(updateHold) {
       plot_bgcolor: "#171717",
       xaxis: { visible: false },
       yaxis: { visible: false }
-    }, { responsive: true, displaylogo: false });
+    }, { responsive: true, displaylogo: false, scrollZoom: true });
     updateStats(null);
     return;
   }
@@ -1714,6 +1716,7 @@ function draw(updateHold) {
     plot_bgcolor: "#171717",
     font: { color: "#f2f2f2" },
     showlegend: false,
+    dragmode: 'pan',
     margin: { t: 30, b: 50, l: 60, r: 20 },
     xaxis: { title: "Frequency (MHz)", gridcolor: "#333" },
     yaxis: {
@@ -1725,7 +1728,8 @@ function draw(updateHold) {
     }
   }, {
     responsive: true,
-    displaylogo: false
+    displaylogo: false,
+    scrollZoom: true
   });
 
   maybeAutoCapture();
@@ -2245,7 +2249,7 @@ function attachEvents() {
     if (S.activeDragMarker === i) {
       S.activeDragMarker = -1;
       plotWrap.classList.remove('plot-drag-mode');
-      Plotly.relayout('plot', { dragmode: 'zoom' });
+      Plotly.relayout('plot', { dragmode: 'pan' });
     } else {
       S.activeDragMarker = i;
       plotWrap.classList.add('plot-drag-mode');
@@ -2312,7 +2316,7 @@ function attachEvents() {
       S.directGrab = false;
       S.activeDragMarker = -1;
       plotDiv.style.cursor = '';
-      Plotly.relayout('plot', { dragmode: 'zoom' });
+      Plotly.relayout('plot', { dragmode: 'pan' });
       renderAllMarkerSubs();
     }
   });
@@ -2364,10 +2368,12 @@ function init() {
   updateSpectroScaleVisibility();
   Plotly.newPlot("plot", [], {
     paper_bgcolor: "#0f0f0f",
-    plot_bgcolor: "#171717"
+    plot_bgcolor: "#171717",
+    dragmode: 'pan'
   }, {
     responsive: true,
-    displaylogo: false
+    displaylogo: false,
+    scrollZoom: true
   });
   updateCaptureTable();
 }
