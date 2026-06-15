@@ -11,28 +11,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#f6f8ef;
-    --bg2:#eef2dd;
-    --panel:#ffffff;
-    --panel2:#f9fbf1;
-    --panel3:#f0f5e0;
-    --border:#d7dfbe;
-    --text:#1f2a1f;
-    --muted:#5a6757;
-    --trace:#1886d8;
-    --hold:#e55c7a;
-    --marker:#e09a19;
-    --good:#2b8f50;
-    --warn:#b97a15;
-    --bad:#c94949;
-    --ring:#c6d39e;
-    --shadow:0 10px 30px rgba(35, 49, 26, 0.09);
+    --bg: #0F0A19;
+    --bg2: #130d22;
+    --panel: #1B1530;
+    --panel2: #201840;
+    --panel3: #251d48;
+    --border: #3d2d6e;
+    --text: #F1F5F9;
+    --muted: #94a3b8;
+    --trace: #38BDF8;
+    --hold: #a78bfa;
+    --marker: #fbbf24;
+    --good: #10b981;
+    --warn: #f59e0b;
+    --bad: #ef4444;
+    --ring: #7C3AED;
+    --shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: "Sora", "Trebuchet MS", "Segoe UI", sans-serif;
-    background: radial-gradient(circle at top right, #ffffff 0%, var(--bg) 44%, var(--bg2) 100%);
+    background: radial-gradient(circle at top right, #1B1530 0%, var(--bg) 44%, #0a0614 100%);
     color: var(--text);
     overflow-x: hidden;
   }
@@ -48,7 +48,7 @@
     margin-bottom: 14px;
     position: relative;
     background:
-      linear-gradient(120deg, #fefefe 0%, #f7fae9 60%, #edf4d8 100%);
+      linear-gradient(120deg, #1B1530 0%, #201840 60%, #251d48 100%);
   }
   .title { margin: 0; font-size: 31px; line-height: 1.1; letter-spacing: -0.4px; }
   .subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
@@ -64,17 +64,17 @@
     height: 690px;
     max-height: 690px;
     background:
-      linear-gradient(180deg, #ffffff 0%, #fbfdf4 100%);
+      linear-gradient(180deg, #1B1530 0%, #201840 100%);
   }
   .chart-panel {
     padding: 14px;
     overflow: hidden;
     min-width: 0;
     background:
-      linear-gradient(180deg, #ffffff 0%, #f8fbe9 100%);
+      linear-gradient(180deg, #1B1530 0%, #201840 100%);
   }
   h2 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.25px; }
-  h3 { margin: 0 0 8px; font-size: 15px; color: #283226; }
+  h3 { margin: 0 0 8px; font-size: 15px; color: #c4b5fd; }
   .intro {
     margin: 0 0 10px;
     color: var(--muted);
@@ -99,9 +99,9 @@
     font-weight: 500;
   }
   .upload-box {
-    border: 1px dashed #8fa274;
+    border: 1px dashed #7C3AED;
     background:
-      linear-gradient(180deg, #f8fced 0%, #edf5db 100%);
+      linear-gradient(180deg, #201840 0%, #251d48 100%);
     border-radius: 14px;
     padding: 14px;
     margin: 14px 0 0;
@@ -135,25 +135,27 @@
   }
   .btn:hover, .play-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 7px 14px rgba(40, 60, 26, 0.13);
-    background: #ecf3d8;
+    box-shadow: 0 7px 14px rgba(124, 58, 237, 0.35);
+    background: #2d2460;
   }
   .play-btn {
-    background: linear-gradient(120deg, #ddecc0 0%, #d2e6a8 100%);
-    border-color: #b9cf8c;
+    background: linear-gradient(120deg, #1e3a5f 0%, #0c4a6e 100%);
+    border-color: #0369a1;
+    color: #e0f2fe;
   }
   .play-btn.is-playing {
-    background: linear-gradient(120deg, #ffe6be 0%, #ffdc9f 100%);
-    border-color: #e8bf74;
+    background: linear-gradient(120deg, #4c1d95 0%, #5b21b6 100%);
+    border-color: #7C3AED;
+    color: #e9d5ff;
   }
   .maxhold-all-btn {
-    background: linear-gradient(120deg, #ffe0e9 0%, #ffc8d5 100%);
-    border-color: #e88a9c;
-    color: #6b1a2a;
+    background: linear-gradient(120deg, #3b0f6e 0%, #4c1d95 100%);
+    border-color: #7C3AED;
+    color: #e9d5ff;
   }
   .maxhold-all-btn:hover {
-    background: linear-gradient(120deg, #ffd0de 0%, #ffb4c6 100%) !important;
-    border-color: #d96880 !important;
+    background: linear-gradient(120deg, #4c1d95 0%, #5b21b6 100%) !important;
+    border-color: #a855f7 !important;
   }
   .maxhold-all-btn:disabled {
     opacity: 0.6;
@@ -167,21 +169,21 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 6px 8px;
-    background: #fafdf2;
+    background: #1a1438;
   }
   .trace-dot {
     width: 12px; height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
-    border: 1px solid rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
   }
   .trace-label { font-size: 12px; font-weight: 700; min-width: 20px; }
   .trace-type-sel {
     font: inherit; font-size: 11px;
-    border: 1px solid #c7d3b2;
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px 5px;
-    background: #fff;
+    background: var(--panel2);
     color: var(--text);
     flex: 1; min-width: 0;
   }
@@ -201,26 +203,26 @@
     border-radius: 5px;
     padding: 3px 0;
     cursor: pointer;
-    border: 1px solid #c7d3b2;
-    background: #eef4dd;
-    color: #3a4a20;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--muted);
     transition: all 0.12s;
   }
   .trace-mode-btn.is-active-update {
-    background: #b8e090;
-    border-color: #7ab840;
-    color: #1a3a00;
+    background: #0d2a1a;
+    border-color: #10b981;
+    color: #4ade80;
   }
   .trace-mode-btn.is-active-view {
-    background: #ffd580;
-    border-color: #c8960a;
-    color: #3a2800;
+    background: #2a1a0d;
+    border-color: #f59e0b;
+    color: #fbbf24;
   }
   .marker-row {
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 8px 10px;
-    background: #fafdf2;
+    background: #1a1438;
   }
   .marker-row-header {
     display: flex;
@@ -232,7 +234,7 @@
     width: 10px; height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
-    border: 1px solid rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
   }
   .marker-label-tag {
     font-size: 12px;
@@ -243,10 +245,10 @@
   .marker-type-sel {
     font: inherit;
     font-size: 11px;
-    border: 1px solid #c7d3b2;
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px 5px;
-    background: #fff;
+    background: var(--panel2);
     color: var(--text);
     flex: 1;
     min-width: 0;
@@ -255,10 +257,10 @@
   .marker-peak-sel {
     font: inherit;
     font-size: 11px;
-    border: 1px solid #c7d3b2;
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 4px 6px;
-    background: #fff;
+    background: var(--panel2);
     color: var(--text);
     width: 100%;
   }
@@ -266,9 +268,9 @@
     font: inherit;
     font-size: 11px;
     font-weight: 700;
-    border: 1px solid #b9cf8c;
-    background: #ddecc0;
-    color: #2b3a20;
+    border: 1px solid var(--border);
+    background: var(--panel3);
+    color: var(--text);
     border-radius: 6px;
     padding: 5px 10px;
     cursor: pointer;
@@ -276,9 +278,9 @@
     text-align: left;
   }
   .marker-place-btn.is-active {
-    background: #ffe066;
-    border-color: #c9a020;
-    color: #3a2800;
+    background: #7C3AED;
+    border-color: #a855f7;
+    color: #ffffff;
   }
   .marker-freq-display {
     font-size: 11px;
@@ -291,14 +293,14 @@
     border: 1px solid #c7d3b2;
     border-radius: 6px;
     padding: 3px 5px;
-    background: #fff8e8;
+    background: var(--panel2);
     color: var(--text);
     width: 100%;
     margin-top: 4px;
   }
   .marker-delta-display {
     font-size: 11px;
-    color: #b06000;
+    color: #38BDF8;
     font-weight: 600;
     padding: 2px 0;
   }
@@ -317,20 +319,20 @@
     width: 100%;
     padding: 9px;
     border-radius: 9px;
-    background: #ffffff;
+    background: var(--bg);
     color: var(--text);
-    border: 1px solid #c7d3b2;
+    border: 1px solid var(--border);
     font-family: inherit;
     font-size: 12px;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .control input:focus, .control select:focus {
     outline: none;
-    border-color: #95b45a;
-    box-shadow: 0 0 0 3px rgba(149, 180, 90, 0.18);
+    border-color: #7C3AED;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
   }
   .checkline { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text); }
-  .checkline input { accent-color: #7ea840; }
+  .checkline input { accent-color: #7C3AED; }
   .inline { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .help {
     margin-top: 5px;
@@ -340,10 +342,10 @@
   }
   .spectro-scale-wrap {
     margin-top: 10px;
-    border: 1px solid #d7dfbe;
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 9px;
-    background: #f7fbe8;
+    background: #140f28;
   }
   .spectro-scale-grid {
     display: grid;
@@ -358,7 +360,7 @@
     padding: 5px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: #f2f6e6;
+    background: #140f28;
   }
   .tab-btn {
     border: 1px solid transparent;
@@ -373,10 +375,10 @@
     letter-spacing: 0.2px;
   }
   .tab-btn.is-active {
-    background: #ffffff;
-    color: #263220;
-    border-color: #cedbae;
-    box-shadow: 0 3px 8px rgba(70, 94, 41, 0.1);
+    background: var(--panel3);
+    color: #38BDF8;
+    border-color: #7C3AED;
+    box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);
   }
   .tab-panel { display: none; }
   .tab-panel.is-active { display: block; }
@@ -386,9 +388,9 @@
     justify-content: flex-end;
   }
   .ghost-btn {
-    border: 1px solid #c6d3a8;
-    background: #f8fbe9;
-    color: #3e4f35;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--muted);
     border-radius: 999px;
     padding: 7px 12px;
     font: inherit;
@@ -398,42 +400,43 @@
     transition: all 0.16s ease;
   }
   .ghost-btn:hover {
-    background: #eef4dd;
-    border-color: #b6c796;
+    background: var(--panel3);
+    border-color: #7C3AED;
+    color: var(--text);
   }
   .ghost-btn.is-active {
-    background: #e1ecc5;
-    border-color: #9db66a;
-    color: #2b3a20;
+    background: var(--panel3);
+    border-color: #7C3AED;
+    color: #38BDF8;
   }
   .focus-card {
     margin-top: 12px;
-    border: 1px solid #ccd9ad;
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 10px;
-    background: linear-gradient(120deg, #ffffff 0%, #f4f9e6 100%);
+    background: linear-gradient(120deg, var(--panel) 0%, var(--panel2) 100%);
     font-size: 11px;
-    color: #4f5f45;
+    color: var(--muted);
     line-height: 1.45;
   }
-  .focus-card strong { color: #293226; }
+  .focus-card strong { color: var(--text); }
   .quick-guide {
     margin-top: 10px;
-    border: 1px solid #cfdbb2;
+    border: 1px solid var(--border);
     border-radius: 12px;
-    background: #f7fbe8;
+    background: var(--panel);
     padding: 9px 10px;
   }
   .quick-guide summary {
     cursor: pointer;
     font-size: 12px;
     font-weight: 700;
-    color: #314027;
+    color: var(--text);
   }
   .quick-guide ol {
     margin: 8px 0 0 18px;
     padding: 0;
-    color: #556351;
+    color: var(--muted);
     font-size: 11px;
     line-height: 1.5;
   }
@@ -446,9 +449,9 @@
     color: var(--muted);
   }
   .slider-meta strong {
-    color: #263220;
-    background: #ecf3d8;
-    border: 1px solid #ccdbac;
+    color: #38BDF8;
+    background: var(--panel3);
+    border: 1px solid var(--border);
     border-radius: 999px;
     padding: 3px 8px;
   }
@@ -459,12 +462,12 @@
     margin-top: 14px;
   }
   .stat {
-    background: #f8fbe9;
+    background: #1a1438;
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 10px;
   }
-  .k { color: #5d6a59; font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
+  .k { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
   .v { font-size: 18px; font-weight: 700; margin-top: 4px; letter-spacing: -0.1px; }
   .quality-line {
     margin-top: 6px;
@@ -475,35 +478,35 @@
   .quality-line strong { color: var(--text); }
   .status {
     margin-top: 14px;
-    color: #445344;
+    color: var(--muted);
     font-size: 12px;
     line-height: 1.4;
     padding: 11px 12px;
     border-radius: 12px;
-    border: 1px solid #cfdab3;
-    background: #f7fbe8;
+    border: 1px solid var(--border);
+    background: var(--panel);
   }
   .status.is-ok {
-    background: #eef8e8;
-    border-color: #b9dab1;
-    color: #2f6e3f;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: #10b981;
+    color: #34d399;
   }
   .status.is-warn {
-    background: #fff8e8;
-    border-color: #f2d092;
-    color: #94600c;
+    background: rgba(245, 158, 11, 0.1);
+    border-color: #f59e0b;
+    color: #fbbf24;
   }
   .status.is-error {
-    background: #fff0ef;
-    border-color: #ecb8b5;
-    color: #8f3833;
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #f87171;
   }
   .legend {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     margin-bottom: 12px;
-    color: #586857;
+    color: var(--muted);
     font-size: 12px;
     font-weight: 600;
   }
@@ -519,8 +522,8 @@
     height: 690px;
     overflow: hidden;
     border-radius: 14px;
-    background: #111;
-    border: 1px solid #d7dfbe;
+    background: #0D0820;
+    border: 1px solid var(--border);
   }
   #plot { width: 100%; height: 100%; }
   .capture-meta {
@@ -532,36 +535,36 @@
   .mini {
     font-size: 12px;
     color: var(--muted);
-    background: #f4f8e5;
-    border: 1px solid #d3dcb9;
+    background: var(--panel2);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 7px;
   }
-  .mini strong { color: #253124; }
+  .mini strong { color: var(--text); }
   .capture-table-wrap {
     margin-top: 10px;
-    border: 1px solid #d3dbb5;
+    border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
     max-height: 220px;
     overflow-y: auto;
-    background: #ffffff;
+    background: var(--panel);
   }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
   th, td {
     padding: 7px 8px;
-    border-bottom: 1px solid #e7edd7;
+    border-bottom: 1px solid var(--border);
     white-space: nowrap;
     text-align: left;
   }
   th {
     position: sticky;
     top: 0;
-    background: #edf4d8;
-    color: #475247;
+    background: var(--panel3);
+    color: var(--text);
     z-index: 1;
   }
-  tr:nth-child(even) td { background: #fbfdf6; }
+  tr:nth-child(even) td { background: #1a1438; }
   .dot {
     display: inline-block;
     width: 7px;
@@ -592,13 +595,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 175" height="70" style="display:block">
         <!-- arc: center (145,65) r=52, gap ±60° from left, clockwise from 240° to 120° -->
         <path d="M 119,20 A 52,52 0 1,1 119,110"
-              fill="none" stroke="#1a2744" stroke-width="8" stroke-linecap="round"/>
+              fill="none" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
         <!-- 4-pointed star: h-radius=42, v-radius=36, pinch=7 -->
         <path d="M 145,29 C 152,58 152,58 187,65 C 152,72 152,72 145,101 C 138,72 138,72 103,65 C 138,58 138,58 145,29 Z"
               fill="#c03020"/>
         <text x="140" y="162" text-anchor="middle"
               font-family="'Trebuchet MS','Segoe UI',Arial,sans-serif"
-              font-size="42" font-weight="500" letter-spacing="12" fill="#1a2744">ONDAS</text>
+              font-size="42" font-weight="500" letter-spacing="12" fill="#F1F5F9">ONDAS</text>
       </svg>
     </div>
   </div>
@@ -973,7 +976,7 @@ const E = {
 };
 
 const MARKER_COLORS = ['#ffd166', '#06d6a0', '#ff6b6b', '#a78bfa'];
-const TRACE_COLORS  = ['#6ec6ff', '#ff7a93', '#a8e6a3', '#ffd580'];
+const TRACE_COLORS  = ['#38BDF8', '#a78bfa', '#34d399', '#fb923c'];
 const TRACE_DEFAULTS = [
   { enabled: true,  type: 'live',    name: 'T1', frozen: false, frozenData: null },
   { enabled: true,  type: 'maxhold', name: 'T2', frozen: false, frozenData: null },
@@ -1599,12 +1602,12 @@ function drawSpectrogram() {
 
   Plotly.react("plot", [heatmap], {
     paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "#171717",
-    font: { color: "#f2f2f2" },
+    plot_bgcolor: "#0D0820",
+    font: { color: "#F1F5F9" },
     dragmode: 'pan',
     margin: { t: 30, b: 80, l: 110, r: 20 },
-    xaxis: { title: "Time", gridcolor: "#333", tickvals, ticktext, tickangle: -45 },
-    yaxis: { title: "Frequency (MHz)", gridcolor: "#333" }
+    xaxis: { title: "Time", gridcolor: "#2d2050", tickvals, ticktext, tickangle: -45 },
+    yaxis: { title: "Frequency (MHz)", gridcolor: "#2d2050" }
   }, {
     responsive: true,
     displaylogo: false,
@@ -1635,8 +1638,8 @@ function updateStats(frame) {
 function draw(updateHold) {
   if (!S.frames.length) {
     Plotly.react("plot", [], {
-      paper_bgcolor: "#0f0f0f",
-      plot_bgcolor: "#171717",
+      paper_bgcolor: "#0D0820",
+      plot_bgcolor: "#0D0820",
       xaxis: { visible: false },
       yaxis: { visible: false }
     }, { responsive: true, displaylogo: false, scrollZoom: true });
@@ -1713,15 +1716,15 @@ function draw(updateHold) {
   const y = yCfg();
   Plotly.react("plot", traces, {
     paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "#171717",
-    font: { color: "#f2f2f2" },
+    plot_bgcolor: "#0D0820",
+    font: { color: "#F1F5F9" },
     showlegend: false,
     dragmode: 'pan',
     margin: { t: 30, b: 50, l: 60, r: 20 },
-    xaxis: { title: "Frequency (MHz)", gridcolor: "#333" },
+    xaxis: { title: "Frequency (MHz)", gridcolor: "#2d2050" },
     yaxis: {
       title: "Amplitude (dBm)",
-      gridcolor: "#333",
+      gridcolor: "#2d2050",
       autorange: y.autorange,
       range: y.range,
       dtick: y.dtick
@@ -2105,6 +2108,15 @@ function computeFullCaptureMaxHold() {
 }
 
 function attachEvents() {
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Control' && !S.isDraggingMarker && S.activeDragMarker < 0)
+      Plotly.relayout('plot', { dragmode: 'zoom' });
+  });
+  window.addEventListener('keyup', (ev) => {
+    if (ev.key === 'Control')
+      Plotly.relayout('plot', { dragmode: S.activeDragMarker >= 0 ? false : 'pan' });
+  });
+
   E.fileInput.onchange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -2367,8 +2379,8 @@ function init() {
   updateSpectrogramScaleUi();
   updateSpectroScaleVisibility();
   Plotly.newPlot("plot", [], {
-    paper_bgcolor: "#0f0f0f",
-    plot_bgcolor: "#171717",
+    paper_bgcolor: "#0D0820",
+    plot_bgcolor: "#0D0820",
     dragmode: 'pan'
   }, {
     responsive: true,
