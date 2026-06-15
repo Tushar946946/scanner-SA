@@ -32,9 +32,11 @@
   body {
     margin: 0;
     font-family: "Sora", "Trebuchet MS", "Segoe UI", sans-serif;
+    font-size: 15px;
     background: radial-gradient(circle at top right, #1B1530 0%, var(--bg) 44%, #0a0614 100%);
     color: var(--text);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
   .app { max-width: 1440px; margin: 0 auto; padding: 16px; }
   .header, .sidebar, .chart-panel {
@@ -54,15 +56,15 @@
   .subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
   .main {
     display: grid;
-    grid-template-columns: 390px minmax(0,1fr);
+    grid-template-columns: 420px minmax(0,1fr);
     gap: 14px;
     align-items: start;
   }
   .sidebar {
-    padding: 16px;
+    padding: 18px;
     overflow-y: auto;
-    height: 690px;
-    max-height: 690px;
+    height: 750px;
+    max-height: 750px;
     background:
       linear-gradient(180deg, #1B1530 0%, #201840 100%);
   }
@@ -73,12 +75,12 @@
     background:
       linear-gradient(180deg, #1B1530 0%, #201840 100%);
   }
-  h2 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.25px; }
-  h3 { margin: 0 0 8px; font-size: 15px; color: #c4b5fd; }
+  h2 { margin: 0 0 4px; font-size: 26px; letter-spacing: -0.25px; }
+  h3 { margin: 0 0 8px; font-size: 16px; color: #c4b5fd; }
   .intro {
     margin: 0 0 10px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
   }
   .section {
@@ -95,7 +97,7 @@
   }
   .section small {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
   }
   .upload-box {
@@ -112,7 +114,7 @@
     margin-bottom: 4px;
   }
   .upload-box .hint {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     line-height: 1.4;
   }
@@ -123,12 +125,12 @@
     background: var(--panel3);
     color: var(--text);
     border-radius: 999px;
-    padding: 11px 14px;
-    min-height: 42px;
+    padding: 12px 16px;
+    min-height: 44px;
     cursor: pointer;
     margin-top: 10px;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.2px;
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
@@ -177,9 +179,9 @@
     flex-shrink: 0;
     border: 1px solid rgba(255,255,255,0.15);
   }
-  .trace-label { font-size: 12px; font-weight: 700; min-width: 20px; }
+  .trace-label { font-size: 13px; font-weight: 700; min-width: 20px; }
   .trace-type-sel {
-    font: inherit; font-size: 11px;
+    font: inherit; font-size: 12px;
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px 5px;
@@ -198,10 +200,10 @@
   .trace-mode-btn {
     flex: 1;
     font: inherit;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     border-radius: 5px;
-    padding: 3px 0;
+    padding: 4px 0;
     cursor: pointer;
     border: 1px solid var(--border);
     background: var(--panel2);
@@ -237,14 +239,14 @@
     border: 1px solid rgba(255,255,255,0.15);
   }
   .marker-label-tag {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     min-width: 20px;
     color: var(--text);
   }
   .marker-type-sel {
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 3px 5px;
@@ -256,23 +258,23 @@
   .marker-sub { margin-top: 7px; display: flex; flex-direction: column; gap: 5px; }
   .marker-peak-sel {
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 4px 6px;
+    padding: 5px 7px;
     background: var(--panel2);
     color: var(--text);
     width: 100%;
   }
   .marker-place-btn {
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     border: 1px solid var(--border);
     background: var(--panel3);
     color: var(--text);
     border-radius: 6px;
-    padding: 5px 10px;
+    padding: 6px 10px;
     cursor: pointer;
     transition: all 0.15s;
     text-align: left;
@@ -283,23 +285,23 @@
     color: #ffffff;
   }
   .marker-freq-display {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     padding: 2px 0;
   }
   .marker-freq-display strong { color: var(--text); }
   .marker-delta-sel {
-    font: inherit; font-size: 11px;
-    border: 1px solid #c7d3b2;
+    font: inherit; font-size: 12px;
+    border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 3px 5px;
+    padding: 4px 6px;
     background: var(--panel2);
     color: var(--text);
     width: 100%;
     margin-top: 4px;
   }
   .marker-delta-display {
-    font-size: 11px;
+    font-size: 12px;
     color: #38BDF8;
     font-weight: 600;
     padding: 2px 0;
@@ -310,20 +312,20 @@
   .control { margin-top: 10px; }
   .control label {
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
     margin-bottom: 5px;
     font-weight: 600;
   }
   .control input, .control select {
     width: 100%;
-    padding: 9px;
+    padding: 10px;
     border-radius: 9px;
     background: var(--bg);
     color: var(--text);
     border: 1px solid var(--border);
     font-family: inherit;
-    font-size: 12px;
+    font-size: 13px;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .control input:focus, .control select:focus {
@@ -336,7 +338,7 @@
   .inline { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .help {
     margin-top: 5px;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     line-height: 1.45;
   }
@@ -365,11 +367,11 @@
   .tab-btn {
     border: 1px solid transparent;
     border-radius: 9px;
-    padding: 8px 8px;
+    padding: 9px 8px;
     background: transparent;
     color: var(--muted);
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     letter-spacing: 0.2px;
@@ -392,9 +394,9 @@
     background: var(--panel2);
     color: var(--muted);
     border-radius: 999px;
-    padding: 7px 12px;
+    padding: 8px 14px;
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.16s ease;
@@ -429,7 +431,7 @@
   }
   .quick-guide summary {
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--text);
   }
@@ -437,7 +439,7 @@
     margin: 8px 0 0 18px;
     padding: 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .slider-meta {
@@ -467,11 +469,11 @@
     border-radius: 14px;
     padding: 10px;
   }
-  .k { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
-  .v { font-size: 18px; font-weight: 700; margin-top: 4px; letter-spacing: -0.1px; }
+  .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
+  .v { font-size: 20px; font-weight: 700; margin-top: 4px; letter-spacing: -0.1px; }
   .quality-line {
     margin-top: 6px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
     line-height: 1.4;
   }
@@ -479,7 +481,7 @@
   .status {
     margin-top: 14px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.4;
     padding: 11px 12px;
     border-radius: 12px;
@@ -507,7 +509,7 @@
     flex-wrap: wrap;
     margin-bottom: 12px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
   }
   .legend-line {
@@ -519,13 +521,23 @@
   }
   #plotWrap {
     width: 100%;
-    height: 690px;
+    height: 750px;
     overflow: hidden;
     border-radius: 14px;
     background: #0D0820;
     border: 1px solid var(--border);
+    position: relative;
   }
   #plot { width: 100%; height: 100%; }
+  #ctrlZoomRect {
+    display: none;
+    position: absolute;
+    border: 2px dashed #7C3AED;
+    background: rgba(124, 58, 237, 0.12);
+    pointer-events: none;
+    z-index: 10;
+    box-sizing: border-box;
+  }
   .capture-meta {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -533,7 +545,7 @@
     margin-top: 8px;
   }
   .mini {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
     background: var(--panel2);
     border: 1px solid var(--border);
@@ -550,9 +562,9 @@
     overflow-y: auto;
     background: var(--panel);
   }
-  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td {
-    padding: 7px 8px;
+    padding: 8px 10px;
     border-bottom: 1px solid var(--border);
     white-space: nowrap;
     text-align: left;
@@ -911,7 +923,7 @@
         <span><span class="legend-line" style="background:var(--hold)"></span>Max hold</span>
         <span><span class="legend-line" style="background:var(--marker)"></span>Marker</span>
       </div>
-      <div id="plotWrap"><div id="plot"></div></div>
+      <div id="plotWrap"><div id="plot"></div><div id="ctrlZoomRect"></div></div>
     </div>
   </div>
 </div>
@@ -2108,15 +2120,6 @@ function computeFullCaptureMaxHold() {
 }
 
 function attachEvents() {
-  window.addEventListener('keydown', (ev) => {
-    if (ev.key === 'Control' && !S.isDraggingMarker && S.activeDragMarker < 0)
-      Plotly.relayout('plot', { dragmode: 'zoom' });
-  });
-  window.addEventListener('keyup', (ev) => {
-    if (ev.key === 'Control')
-      Plotly.relayout('plot', { dragmode: S.activeDragMarker >= 0 ? false : 'pan' });
-  });
-
   E.fileInput.onchange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -2290,11 +2293,44 @@ function attachEvents() {
   plotDiv.addEventListener('mousemove', (ev) => {
     if (S.isDraggingMarker) return;
     if (S.activeDragMarker >= 0) return;
+    if (ev.ctrlKey) { plotDiv.style.cursor = 'crosshair'; return; }
     const hit = hitTestMarker(ev.clientX);
     plotDiv.style.cursor = hit >= 0 ? 'grab' : '';
   });
 
+  // Custom Ctrl+drag box-zoom overlay state
+  const zoomRect = document.getElementById('ctrlZoomRect');
+  let ctrlZoom = null; // { startX, startY, wrapRect } while dragging
+
+  function plotClientToPlotFrac(clientX, clientY) {
+    const layout = plotDiv._fullLayout;
+    if (!layout) return null;
+    const rect = plotDiv.getBoundingClientRect();
+    const ml = layout.margin.l, mr = layout.margin.r;
+    const mt = layout.margin.t, mb = layout.margin.b;
+    const plotW = layout.width - ml - mr;
+    const plotH = layout.height - mt - mb;
+    const relX = clientX - rect.left;
+    const relY = clientY - rect.top;
+    return {
+      xFrac: (relX - ml) / plotW,
+      yFrac: (relY - mt) / plotH,
+    };
+  }
+
   plotDiv.addEventListener('mousedown', (ev) => {
+    if (ev.ctrlKey && S.activeDragMarker < 0 && !S.isDraggingMarker) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      const wrapRect = document.getElementById('plotWrap').getBoundingClientRect();
+      ctrlZoom = { startX: ev.clientX, startY: ev.clientY, wrapRect };
+      zoomRect.style.display = 'block';
+      zoomRect.style.left = (ev.clientX - wrapRect.left) + 'px';
+      zoomRect.style.top  = (ev.clientY - wrapRect.top) + 'px';
+      zoomRect.style.width  = '0px';
+      zoomRect.style.height = '0px';
+      return;
+    }
     if (S.activeDragMarker >= 0) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -2316,12 +2352,46 @@ function attachEvents() {
   }, true);
 
   window.addEventListener('mousemove', (ev) => {
+    if (ctrlZoom) {
+      const wr = ctrlZoom.wrapRect;
+      const x0 = Math.min(ev.clientX, ctrlZoom.startX) - wr.left;
+      const y0 = Math.min(ev.clientY, ctrlZoom.startY) - wr.top;
+      const w  = Math.abs(ev.clientX - ctrlZoom.startX);
+      const h  = Math.abs(ev.clientY - ctrlZoom.startY);
+      zoomRect.style.left   = x0 + 'px';
+      zoomRect.style.top    = y0 + 'px';
+      zoomRect.style.width  = w  + 'px';
+      zoomRect.style.height = h  + 'px';
+      return;
+    }
     if (!S.isDraggingMarker || S.activeDragMarker < 0) return;
     ev.preventDefault();
     applyMarkerDrag(ev.clientX);
   });
 
-  window.addEventListener('mouseup', () => {
+  window.addEventListener('mouseup', (ev) => {
+    if (ctrlZoom) {
+      zoomRect.style.display = 'none';
+      const layout = plotDiv._fullLayout;
+      if (layout && layout.xaxis && layout.yaxis) {
+        const f0 = plotClientToPlotFrac(ctrlZoom.startX, ctrlZoom.startY);
+        const f1 = plotClientToPlotFrac(ev.clientX, ev.clientY);
+        if (f0 && f1 && Math.abs(ev.clientX - ctrlZoom.startX) > 8 && Math.abs(ev.clientY - ctrlZoom.startY) > 8) {
+          const xr = layout.xaxis.range;
+          const yr = layout.yaxis.range;
+          const xMin = xr[0] + Math.min(f0.xFrac, f1.xFrac) * (xr[1] - xr[0]);
+          const xMax = xr[0] + Math.max(f0.xFrac, f1.xFrac) * (xr[1] - xr[0]);
+          const yMin = yr[0] + (1 - Math.max(f0.yFrac, f1.yFrac)) * (yr[1] - yr[0]);
+          const yMax = yr[0] + (1 - Math.min(f0.yFrac, f1.yFrac)) * (yr[1] - yr[0]);
+          Plotly.relayout('plot', {
+            'xaxis.range': [xMin, xMax],
+            'yaxis.range': [yMin, yMax],
+          });
+        }
+      }
+      ctrlZoom = null;
+      return;
+    }
     if (!S.isDraggingMarker) return;
     S.isDraggingMarker = false;
     if (S.directGrab) {
